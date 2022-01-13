@@ -2134,7 +2134,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.value.lastname != '' && this.value.fristname != '') {
         console.log(values);
-        axios__WEBPACK_IMPORTED_MODULE_0___default().post('http://localhost:8000/postdata', values).then(function (response) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default().post('http://localhost:8000/api/postdata', values).then(function (response) {
           console.log(response.data.status);
         });
         this.value.frist_name = '';
@@ -2144,13 +2144,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     updatefrom: function updatefrom() {
       var itself = this;
-      this.upflag = true;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('http://localhost:8000/update/' + itself.value.id, itself.value);
+      this.upflag = false;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('http://localhost:8000/api/update/' + itself.value.id, itself.value);
       this.getAllItems();
+      this.reset();
     },
     deletedata: function deletedata(id) {
       var itself = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('http://localhost:8000/delete/' + id).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('http://localhost:8000/api/delete/' + id).then(function (response) {
         console.log(response.data);
       });
       this.getAllItems();
@@ -2161,14 +2162,14 @@ __webpack_require__.r(__webpack_exports__);
     getAllItems: function getAllItems() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('http://localhost:8000/getdata').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('http://localhost:8000/api/getdata').then(function (response) {
         return _this.info = response.data;
       });
     },
     showdata: function showdata(id) {
       var itself = this;
       console.log(id);
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('http://localhost:8000/show/' + id).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('http://localhost:8000/api/show/' + id).then(function (response) {
         itself.value = response.data;
         console.log(response.data);
         itself.upflag = true;

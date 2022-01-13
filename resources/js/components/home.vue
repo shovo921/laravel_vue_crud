@@ -72,7 +72,7 @@ export default {
       if(this.value.lastname != '' && this.value.fristname != '')
       {
         console.log(values);
-          axios.post('http://localhost:8000/postdata',values)
+          axios.post('http://localhost:8000/api/postdata',values)
           .then(function(response){
            console.log(response.data.status);
            
@@ -89,15 +89,17 @@ export default {
     },
     updatefrom(){
       let itself=this;
-    this.upflag=true;
-    axios.post('http://localhost:8000/update/'+itself.value.id,itself.value)
-    this.getAllItems();
+      this.upflag=false;
+      axios.post('http://localhost:8000/api/update/'+itself.value.id,itself.value)
+      this.getAllItems();
+      this.reset();
+    
     },
      deletedata(id){
       let itself=this;
-     axios.get('http://localhost:8000/delete/'+id)
+     axios.get('http://localhost:8000/api/delete/'+id)
      .then(function(response){
-console.log(response.data);
+      console.log(response.data);
     })
        this.getAllItems();
     },
@@ -107,14 +109,14 @@ console.log(response.data);
    
     },
     getAllItems(){
-          axios.get('http://localhost:8000/getdata')
+          axios.get('http://localhost:8000/api/getdata')
       
           .then(response => (this.info = response.data))
     },
     showdata(id){
-  let itself=this;
+    let itself=this;
       console.log(id);
-      axios.get('http://localhost:8000/show/'+id)
+      axios.get('http://localhost:8000/api/show/'+id)
       .then(function(response){
         itself.value=response.data;
         console.log(response.data);
