@@ -5,6 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <meta name="csrf-token" value="{{ csrf_token() }}" />
+        <script src="https://cdn.jsdelivr.net/npm/vue-toast-notification@3"></script>
+<link href="https://cdn.jsdelivr.net/npm/vue-toast-notification@3/dist/theme-sugar.css" rel="stylesheet">
+<!-- Init the plugin -->
         <title>Laravel</title>
 
         <!-- Fonts -->

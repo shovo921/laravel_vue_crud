@@ -59,7 +59,10 @@ export default {
 		return {
 			upflag: false,
       info:[],
-      value:{},
+      value:{
+         frist_name:'',
+          last_name:''
+      },
 
 		};
 	},
@@ -67,32 +70,42 @@ export default {
     handefrom (e)
     {
     
-     let values=this.value;
+   
 
-      if(this.value.lastname != '' && this.value.fristname != '')
+      if(this.value.frist_name != '' && this.value.last_name != '')
       {
-        console.log(values);
+          let values=this.value;
+          let itself= this;
+          console.log(values);
           axios.post('http://localhost:8000/api/postdata',values)
-          .then(function(response){
-           console.log(response.data.status);
+          .then(function(response)
+          {
+              console.log(response.data.status);
+             itself.$toasted.show('your data added successfully');
            
           }
-
       );
+      }
+      else
+      {
+         this.$toasted.show('please fill up from');
+      }
 
      this.value.frist_name='';
      this.value.last_name='';
      this.getAllItems();
      
 
-    }
+  
     },
     updatefrom(){
       let itself=this;
       this.upflag=false;
-      axios.post('http://localhost:8000/api/update/'+itself.value.id,itself.value)
+      axios.post('http://localhost:8000/api/update/'+itself.value.id,itself.value);
+      itself.$toasted.show( itself.value.id + ' Number data updated successfully');
       this.getAllItems();
       this.reset();
+       
     
     },
      deletedata(id){
@@ -100,12 +113,14 @@ export default {
      axios.get('http://localhost:8000/api/delete/'+id)
      .then(function(response){
       console.log(response.data);
+        itself.$toasted.show( id +' number data deleted successfully');
     })
        this.getAllItems();
     },
     
     reset(){
-      this.value={};
+       this.value.frist_name='';
+       this.value.last_name='';
    
     },
     getAllItems(){
@@ -128,6 +143,9 @@ export default {
   
      mounted () {
        this.getAllItems();
+      
+      
+      
     
   },
 };
