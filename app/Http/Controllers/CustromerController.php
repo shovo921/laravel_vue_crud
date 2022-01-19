@@ -51,4 +51,10 @@ class CustromerController extends Controller
         $data->delete();
         return response()->json('customer deleted!');
     }
+    public function search($a)
+    {
+        $data = customer::where('frist_name', 'like', "%{$a}%");
+        
+        return json_encode($data);
+    }
 }

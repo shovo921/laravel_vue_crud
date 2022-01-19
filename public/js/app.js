@@ -2117,12 +2117,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "home",
   data: function data() {
     return {
+      query: '',
       upflag: false,
       info: [],
       value: {
@@ -2130,6 +2138,14 @@ __webpack_require__.r(__webpack_exports__);
         last_name: ''
       }
     };
+  },
+  watch: {
+    query: function query(val) {
+      console.log(this.query);
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('http://localhost:8000/api/search/' + this.query).then(function (response) {
+        console.log(response);
+      });
+    }
   },
   methods: {
     handefrom: function handefrom(e) {
@@ -2141,6 +2157,10 @@ __webpack_require__.r(__webpack_exports__);
           console.log(response.data.status);
           itself.$toasted.show('your data added successfully');
         });
+      } else if (this.value.frist_name = '') {
+        this.$toasted.show('please fill up frist name');
+      } else if (this.value.last_name = '') {
+        this.$toasted.show('please fill up last name');
       } else {
         this.$toasted.show('please fill up from');
       }
@@ -20299,6 +20319,32 @@ var render = function () {
             [_vm._v("Submit")]
           )
         : _vm._e(),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "exampleInputEmail1" } }, [_vm._v("Search")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.query,
+            expression: "query",
+          },
+        ],
+        staticClass: "form-control",
+        attrs: { type: "text" },
+        domProps: { value: _vm.query },
+        on: {
+          input: function ($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.query = $event.target.value
+          },
+        },
+      }),
     ]),
     _vm._v(" "),
     _c("table", { staticClass: "table" }, [

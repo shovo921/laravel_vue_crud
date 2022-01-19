@@ -24,3 +24,4 @@ Route::get('/show/{id}', [CustromerController::class, 'show']);
 Route::get('/delete/{id}', [CustromerController::class, 'delete']);
 Route::post('/update/{id}', [CustromerController::class, 'update']);
 Route::post('/postdata', [CustromerController::class, 'postdata']);
+Route::get('/search/{data}', [CustromerController::class, 'search']);

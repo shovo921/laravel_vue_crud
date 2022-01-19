@@ -5,6 +5,7 @@
 
   
   <form class="mt-10"  >
+
   <div class="form-group">
     <label for="exampleInputEmail1">First Name</label>
     <input type="text" class="form-control" v-model="value.frist_name">
@@ -15,10 +16,16 @@
     <input type="text" class="form-control"  v-model="value.last_name">
   </div>
 
+ 
+
   <button @click.prevent="updatefrom($event)" v-if="upflag" type="submit" class="btn bg-success">Update</button>
   <button @click.prevent="reset($event)" v-if="upflag" type="submit" class="btn bg-success">Reset</button>
   <button @click.prevent="handefrom($event)" v-if="!upflag" type="submit" class="btn bg-success">Submit</button>
 </form>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Search</label>
+    <input type="text" class="form-control" v-model="query">
+  </div>
 
  <table class="table">
   <thead>
@@ -57,15 +64,26 @@ export default {
 	name: "home",
 	data() {
 		return {
+      query:'',
 			upflag: false,
       info:[],
       value:{
-         frist_name:'',
+          frist_name:'',
           last_name:''
       },
 
 		};
 	},
+  watch :{
+      query (val){
+    
+        console.log(this.query);
+         axios.get('http://localhost:8000/api/search/'+this.query)
+         .then(function(response){
+         console.log(response)
+         });
+      }
+  },
   methods:{
     handefrom (e)
     {
@@ -86,7 +104,15 @@ export default {
           }
       );
       }
-      else
+      else if(this.value.frist_name = '')
+      {
+        this.$toasted.show('please fill up frist name');
+      }
+       else if(this.value.last_name = '')
+      {
+        this.$toasted.show('please fill up last name');
+      }
+      else 
       {
          this.$toasted.show('please fill up from');
       }
