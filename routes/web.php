@@ -15,9 +15,4 @@ use App\Http\Controllers\CustromerController;
 */
 
 
-Route::get('/', [CustromerController::class, 'index']);
-Route::get('/getdata', [CustromerController::class, 'getdata']);
-Route::get('/show/{id}', [CustromerController::class, 'show']);
-Route::get('/delete/{id}', [CustromerController::class, 'delete']);
-Route::post('/update/{id}', [CustromerController::class, 'update']);
-Route::post('/postdata', [CustromerController::class, 'postdata']);
+
